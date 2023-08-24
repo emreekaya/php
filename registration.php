@@ -106,7 +106,7 @@ if (isset($_POST["submit"])) {
 
   </head>
   <body>
-    <div class="container p-5">
+    <div class="container col-md-4 p-5">
         <div class="card p-5">
 
                 <form action="registration.php" method="POST">
