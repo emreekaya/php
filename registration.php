@@ -2,91 +2,94 @@
 
 include("connection.php");
 
-$username_error=$userName="";
-$email_error=$eMail="";
-$password_error=$passwordre_error=$password="";
-if(isset($_POST["submit"]))
-{
-//username verification
+$username_error="";
+$email_error="";
+$password_error=$passwordre_error="";
+if (isset($_POST["submit"])) {
+    $userName = "";
+    $eMail = "";
+    $password = "";
 
-    if (empty($_POST["username"]))
-    {
-        $username_error="Username cannot be blank";
-    }
-    elseif (strlen($_POST["username"])<4)
-    {
-        $username_error="Username must be at least 4 characters";
-    }
-    else if (!preg_match('/^[a-z\d_]{5,20}$/i', $_POST["username"])) //username format
-    {
-        $username_error="Username must consist of upper and lower case letters and numbers.";
-    }
-    else
-    {
-        $userName=$_POST["username"];
+    //username verification
 
-    }
-    
-//Email verification
-
-    if (empty($_POST["email"]))
-    {
-        $email_error="Email cannot be blank";
-    }
-    else if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) //Email format
-    {
-        $email_error = "Invalid email format";
-    }
-        else 
+        if (empty($_POST["username"]))
         {
-            $eMail=$_POST["email"];
+            $username_error="Username cannot be blank";
+        }
+        elseif (strlen($_POST["username"])<4)
+        {
+            $username_error="Username must be at least 4 characters";
+        }
+        else if (!preg_match('/^[a-z\d_]{5,20}$/i', $_POST["username"])) //username format
+        {
+            $username_error="Username must consist of upper and lower case letters and numbers.";
+        }
+        else
+        {
+            $userName=$_POST["username"];
+
+        }
+        
+    //Email verification
+
+        if (empty($_POST["email"]))
+        {
+            $email_error="Email cannot be blank";
+        }
+        else if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) //Email format
+        {
+            $email_error = "Invalid email format";
+        }
+            else 
+            {
+                $eMail=$_POST["email"];
+            }
+
+    //Password verification
+        if (empty($_POST["password"]))
+        {
+            $password_error="Password cannot be blank";
+        }
+        else
+        {
+            $password=password_hash($_POST["password"],PASSWORD_DEFAULT);
         }
 
-//Password verification
-    if (empty($_POST["password"]))
-    {
-        $password_error="Password cannot be blank";
-    }
-    else
-    {
-        $password=password_hash($_POST["password"],PASSWORD_DEFAULT);
-    }
-
-//Re-enter password verification
-    if (empty($_POST["passwordre"]))
-    {
-        $passwordre_error="Re-Enter password cannot be blank";
-    }
-    else if ($_POST["password"]!=$_POST["passwordre"])
-    {
-        $password_error="Passwords does not match";
-    }
-
-    else
-    {
-        $passwordre=$_POST["passwordre"];
-    }
-
-
-
-    if(isset($userName) && ($eMail) && ($password))
-    {
-        $add="INSERT INTO users (user_name,emaill,passwordd) VALUES ('$userName','$eMail','$password')";
-        $run_add= mysqli_query($connection,$add);
-
-        if ($run_add) {
-            echo '<div class="alert alert-success" role="alert">
-                Registration was successful!
-                </div>';
+    //Re-enter password verification
+        if (empty($_POST["passwordre"]))
+        {
+            $passwordre_error="Re-Enter password cannot be blank";
         }
-        else {
-            echo '<div class="alert alert-danger" role="alert">
-                There was a problem adding the registration!
-                </div>';
+        else if ($_POST["password"]!=$_POST["passwordre"])
+        {
+            $password_error="Passwords does not match";
         }
-    
-        mysqli_close($connection);
-    }
+
+        else
+        {
+            $passwordre=$_POST["passwordre"];
+        }
+
+
+
+        if(isset($userName) && ($eMail) && ($password))
+        {
+            $add="INSERT INTO users (user_name,emaill,passwordd) VALUES ('$userName','$eMail','$password')";
+            $run_add= mysqli_query($connection,$add);
+
+            if ($run_add) {
+                echo '<div class="alert alert-success" role="alert">
+                    Registration was successful!
+                    </div>';
+            }
+            else {
+                echo '<div class="alert alert-danger" role="alert">
+                    There was a problem adding the registration!
+                    </div>';
+            }
+        
+            mysqli_close($connection);
+        }
 
 }
 
