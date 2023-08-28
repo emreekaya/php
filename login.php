@@ -47,7 +47,18 @@ if(isset($_POST["login"]))
                 session_start();
                 $_SESSION["user_name"]=$logged_user["user_name"];
                 $_SESSION["password"]=$logged_user["passwordd"];
-                header("location:profile.php");
+                
+                // I check the user role.
+                if ($logged_user["roles"] == "user") {
+
+                    header("location:add_product.php");
+                } 
+                elseif ($logged_user["roles"] == "member") {
+                    header("location:profile.php");
+                } 
+                else {
+
+                }
            }
            else
            {

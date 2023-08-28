@@ -74,7 +74,7 @@ if (isset($_POST["submit"])) {
 
         if(isset($userName) && ($eMail) && ($password))
         {
-            $add="INSERT INTO users (user_name,emaill,passwordd) VALUES ('$userName','$eMail','$password')";
+            $add="INSERT INTO users (user_name,emaill,passwordd,roles) VALUES ('$userName','$eMail','$password','member')";
             $run_add= mysqli_query($connection,$add);
 
             if ($run_add) {
@@ -109,7 +109,7 @@ if (isset($_POST["submit"])) {
     <div class="container col-md-4 p-5">
         <div class="card p-5">
 
-                <form action="registration.php" method="POST">
+                <form action="member_registration.php" method="POST">
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">User Name</label>
             <input type="text" class="form-control 
