@@ -16,7 +16,7 @@ if (isset($_SESSION["user_name"])) {
             margin: 10px;
             width: 300px;
             display: inline-block;
-            cursor: pointer; /* Kartı tıklanabilir yapmak için cursor özelliğini ekledik */
+            cursor: pointer; /* Kartı tıklanabilir yapmak için cursor özelliğini ekledim */
         }
     </style>
 </head>
@@ -32,8 +32,8 @@ if (isset($_SESSION["user_name"])) {
                 $id = $pull["Id"];
                 $ad = $pull["productName"];
         ?>
-        <!-- Kartları tıklanabilir bağlantılara dönüştürdük -->
-        <a href="product_details.php?id=<?php echo $id; ?>" class="card">
+        
+        <a href="product_details.php?id=<?php echo $id; ?>" class="card"> <!-- Kartları tıklanabilir bağlantılara dönüştürdüm -->
             <h2><?php echo $ad; ?></h2>
             <p>ID: <?php echo $id; ?></p>
         </a>
