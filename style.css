@@ -1,0 +1,50 @@
+/* Temel Sayfa Stilleri */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Üst Bilgi Alanı */
+h3 {
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+/* Ürün Kartları */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 300px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    transition: background-color 0.3s ease;
+}
+
+.card:hover {
+    background-color: #f0f0f0;
+}
+
+/* Çıkış Bağlantısı */
+.exit-link {
+    color: white;
+    background-color: red;
+    border: 1px solid black;
+    padding: 5px 10px;
+    text-decoration: none;
+    margin-top: 20px;
+}

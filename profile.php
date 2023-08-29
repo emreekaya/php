@@ -9,45 +9,7 @@ if (isset($_SESSION["user_name"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product List</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-        .card {
-            border: 1px solid #ccc;
-            padding: 10px;
-            width: 300px;
-            cursor: pointer;
-            text-decoration: none;
-            color: black;
-            background-color: white;
-            transition: background-color 0.3s ease;
-        }
-        .card:hover {
-            background-color: #f0f0f0;
-        }
-        .exit-link {
-            color: red;
-            background-color: yellow;
-            border: 1px solid red;
-            padding: 5px 10px;
-            text-decoration: none;
-            margin-top: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h3>Welcome, <?php echo $_SESSION["user_name"]; ?>!</h3>
