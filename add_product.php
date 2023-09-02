@@ -1,7 +1,7 @@
 <?php
 include("connection.php");
 
-$productName = $productPrice = $productQuantity = $productDescription = "";
+$productName = $productPrice = $productQuantity = $productDescription = $categoryId = "";
 $productName_error = $productPrice_error = $productQuantity_error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -10,6 +10,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $productPrice = $_POST["productPrice"];
     $productQuantity = $_POST["productQuantity"];
     $productDescription = $_POST["productDescription"];
+    $categoryId = $_POST["categoryId"];
 
     // Form verification
     if (empty($productName)) {
@@ -30,11 +31,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $target_file = $target_dir . basename($_FILES["productImage"]["name"]);
         move_uploaded_file($_FILES["productImage"]["tmp_name"], $target_file);
 
-        // Add product to database
-        $add_product_query = "INSERT INTO products (productName, productPrice, productQuantity, productDescription, productImage) VALUES ('$productName', '$productPrice', '$productQuantity', '$productDescription', '$target_file')";
+        // Add product to database with category ID
+        $add_product_query = "INSERT INTO products (productName, productPrice, productQuantity, productDescription, productImage, category_id) VALUES ('$productName', '$productPrice', '$productQuantity', '$productDescription', '$target_file', '$categoryId')";
 
         if (mysqli_query($connection, $add_product_query)) {
-            echo "product added successfully.";
+            echo "Product added successfully.";
+            echo "<script>
+            setTimeout(function() {
+                window.location.href = 'add_product.php';
+            }, 1000);
+          </script>";
         } else {
             echo "An error occurred while adding the product: " . mysqli_error($connection);
         }
@@ -43,13 +49,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ürün Ekle</title>
+    <title>Add Product</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -99,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <div class="container">
-        <h2>Ürün Ekle</h2>
+        <h2>Add Product</h2>
         <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST" enctype="multipart/form-data">
             <label for="productName">Product Name:</label>
             <input type="text" name="productName" required>
@@ -116,10 +121,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="productDescription">Description:</label>
             <textarea name="productDescription" rows="4" cols="50"></textarea>
 
+            <label for="categoryId">Category:</label>
+            <select name="categoryId" required>
+                <option value="" disabled selected>Select a category</option>
+                <?php
+                // Kategorileri veritabanından alın ve seçenekler olarak ekle
+                $category_query = "SELECT * FROM categories";
+                $category_result = mysqli_query($connection, $category_query);
+
+                while ($row = mysqli_fetch_assoc($category_result)) {
+                    echo '<option value="' . $row['id'] . '">' . $row['category_name'] . '</option>';
+                }
+                ?>
+            </select>
+
             <label for="productImage">Upload Image:</label>
             <input type="file" name="productImage" accept="image/*">
 
-            <input type="submit" value="Add Product">
+            <button type="submit"> Add Product </button>
         </form>
     </div>
 </body>

@@ -1,10 +1,7 @@
 <?php
 session_start();
-if (isset($_GET['id'])) {                                        // get category id from previous page
-    $cat_id = $_GET['id'];
-
+if (isset($_SESSION["user_name"])) {
     include("connection.php");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,16 +15,16 @@ if (isset($_GET['id'])) {                                        // get category
     <h3>Welcome, <?php echo $_SESSION["user_name"]; ?>!</h3>
     <div class="container">
         <?php
-        $select = "SELECT * FROM products WHERE category_id = $cat_id";   // select the category from the database
+        $select = "SELECT * FROM categories ORDER BY id";
         $sonuc = $connection->query($select);
 
         if ($sonuc->num_rows > 0) {
             while ($pull = $sonuc->fetch_assoc()) {
-                $id = $pull["Id"];
-                $ad = $pull["productName"];
+                $id = $pull["id"];
+                $ad = $pull["category_name"];
         ?>
         
-        <a href="product_details.php?id=<?php echo $id; ?>" class="card">
+        <a href="profile.php?id=<?php echo $id; ?>" class="card">
             <h2><?php echo $ad; ?></h2>
             <p>ID: <?php echo $id; ?></p>
         </a>

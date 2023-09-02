@@ -51,10 +51,10 @@ if(isset($_POST["login"]))
                 // I check the user role.
                 if ($logged_user["roles"] == "user") {
 
-                    header("location:add_product.php");
+                    header("location:add_categories.php");
                 } 
                 elseif ($logged_user["roles"] == "member") {
-                    header("location:profile.php");
+                    header("location:category_list.php");
                 } 
                 else {
 
