@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($productPrice)) {
         $productPrice_error = "Price can not be blank.";
     }
-
+    
     if (empty($productQuantity)) {
         $productQuantity_error = "Quantity can not be blank.";
     }
