@@ -24,7 +24,7 @@ if (isset($_SESSION["user_name"])) {
                 $ad = $pull["category_name"];
         ?>
         
-        <a href="profile.php?id=<?php echo $id; ?>" class="card">
+        <a href="product_list.php?id=<?php echo $id; ?>" class="card">
             <h2><?php echo $ad; ?></h2>
             <p>ID: <?php echo $id; ?></p>
         </a>
