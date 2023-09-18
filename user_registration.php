@@ -182,7 +182,7 @@ if (isset($_POST["submit"])) {
 
         </div>
 
-        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" name="submit" class="btn btn-primary">Submi</button>
         </form>
 
         <a href="login.php" class="btn btn-primary">Sign In</a>
